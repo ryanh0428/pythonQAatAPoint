@@ -33,7 +33,10 @@ class Cards_Detail_Page():
     def get_card_type_and_arena(self)->tuple[str, int]:
         type_and_arena = self.map.card_category().text.split(', ')
         card_type=type_and_arena[0]
-        card_arena = int(type_and_arena[1].split()[-1])
+        card_arena = type_and_arena[1].split(' ')[-1]
+        if card_arena in '01234567891011121314':
+            print(card_arena)
+            card_arena = int(card_arena)
         return card_type, card_arena
 class CardsDetailMap():
     def __init__(self,driver):

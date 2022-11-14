@@ -45,8 +45,8 @@ def test_card_is_display(api_card):
 #     assert driver.find_element(By.CSS_SELECTOR,"[href*='Phoenix']").is_displayed() == False
 
 
-@pytest.mark.parametrize('card',cards)
-def test_phoenix_detail_is_displayed(card):
+@pytest.mark.parametrize('api_card',cards)
+def test_phoenix_detail_is_displayed(api_card):
     driver = webdriver.Chrome()
     #1 go to statroyale.com
     driver.get("https://statsroyale.com/")
@@ -57,17 +57,17 @@ def test_phoenix_detail_is_displayed(card):
     #2. click the "Cards" button on the nav bar
     cards_page = CardsPage(driver)
     # cards_page.goto()
-    card_on_page = cards_page.goto().get_card_by_name(card.name)
+    print("Name : " + api_card.name)
+    card_on_page = cards_page.goto().get_card_by_name(api_card.name)
     assert card_on_page.is_displayed()
     #3. click the phoenix card
-    driver.find_element(By.CSS_SELECTOR,"[href*='Phoenix']").click()
+    card_on_page.click()
     #4. check the card details are displayed
     cardDetailPage = Cards_Detail_Page(driver)
     card = Cards_Detail_Page.get_base_card(cardDetailPage)
-    assert card.name == 'Phoenix'
-    assert card.type == 'Troop'
-    assert card.arena == 12
-    assert card.rarity == 'Legendary'
+    assert card.name == api_card.name
+    assert card.arena == api_card.arena
+    assert card.rarity == api_card.rarity
 
 
 # def test_mirror_detail_is_displayed():

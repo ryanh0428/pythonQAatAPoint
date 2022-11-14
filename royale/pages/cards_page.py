@@ -30,4 +30,4 @@ class CardsPageMap:
         return self._driver.find_element(By.CSS_SELECTOR,"[href*='Phoenix']")
 
     def card(self, card_name) -> WebElement:
-        return self._driver.find_element(By.CSS_SELECTOR, f"[href*={card_name}]")
+        return self._driver.find_element(By.CSS_SELECTOR, f"[href*='{card_name}']")
